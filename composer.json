@@ -1,7 +1,6 @@
 {
     "name": "php-concept/extension-http",
     "description": "Concept HTTP extension — responses, URLs, route introspection",
-    "version": "1.0.0",
     "type": "library",
     "license": "MIT",
     "autoload": {
