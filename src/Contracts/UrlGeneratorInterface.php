@@ -2,11 +2,9 @@
 
 namespace Concept\Extensions\Http\Contracts;
 
-use Psr\Http\Message\ServerRequestInterface;
-
 interface UrlGeneratorInterface
 {
-    public function base(ServerRequestInterface $request): string;
+    public function base(): string;
 
     /**
      * @param array<string, mixed> $parameters
@@ -16,5 +14,5 @@ interface UrlGeneratorInterface
     /**
      * @param array<string, mixed> $parameters
      */
-    public function url(ServerRequestInterface $request, string $name, array $parameters = []): string;
+    public function url(string $name, array $parameters = []): string;
 }
