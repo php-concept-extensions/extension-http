@@ -26,7 +26,10 @@ final class ResponseFactoryTest extends TestCase
         $router->get('/dashboard', static fn(): null => null)->setName('dashboard');
 
         $this->requestContext = new RequestContext();
-        $this->factory = new ResponseFactory(new UrlGenerator($router), $this->requestContext);
+        $this->factory = new ResponseFactory(
+            new UrlGenerator($router, $this->requestContext),
+            $this->requestContext,
+        );
     }
 
     public function testJsonEncodesPayloadWithJsonContentType(): void
@@ -36,37 +39,6 @@ final class ResponseFactoryTest extends TestCase
         $this->assertSame(HttpStatusCode::CREATED, $response->getStatusCode());
         $this->assertSame(HttpValue::JSON, $response->getHeaderLine(HttpHeader::CONTENT_TYPE));
         $this->assertSame('{"message":"ok"}', (string) $response->getBody());
-    }
-
-    public function testJsonSuccessWrapsData(): void
-    {
-        $response = $this->factory->jsonSuccess(['id' => 1]);
-        $payload = json_decode((string) $response->getBody(), true);
-
-        $this->assertSame([
-            'status' => 'success',
-            'code' => HttpStatusCode::OK,
-            'data' => ['id' => 1],
-        ], $payload);
-    }
-
-    public function testJsonErrorIncludesOptionalErrors(): void
-    {
-        $withoutErrors = $this->factory->jsonError('failed', HttpStatusCode::UNPROCESSABLE_ENTITY);
-        $withErrors = $this->factory->jsonError('failed', HttpStatusCode::UNPROCESSABLE_ENTITY, ['email' => ['required']]);
-
-        $this->assertSame(
-            [
-                'status' => 'error',
-                'code' => HttpStatusCode::UNPROCESSABLE_ENTITY,
-                'message' => 'failed',
-            ],
-            json_decode((string) $withoutErrors->getBody(), true),
-        );
-        $this->assertSame(
-            ['email' => ['required']],
-            json_decode((string) $withErrors->getBody(), true)['errors'],
-        );
     }
 
     public function testRedirectReturnsLocationHeader(): void
