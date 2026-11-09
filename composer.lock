@@ -551,16 +551,16 @@
         },
         {
             "name": "php-concept/extension-event",
-            "version": "v1.1.4",
+            "version": "v1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-concept-extensions/extension-event.git",
-                "reference": "c15440104e07acc0982e32da503ee75f152bc008"
+                "reference": "a2cd8bf0b5d4c7b552e49649034c0d83381f9892"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-concept-extensions/extension-event/zipball/c15440104e07acc0982e32da503ee75f152bc008",
-                "reference": "c15440104e07acc0982e32da503ee75f152bc008",
+                "url": "https://api.github.com/repos/php-concept-extensions/extension-event/zipball/a2cd8bf0b5d4c7b552e49649034c0d83381f9892",
+                "reference": "a2cd8bf0b5d4c7b552e49649034c0d83381f9892",
                 "shasum": ""
             },
             "require": {
@@ -583,9 +583,9 @@
             "description": "Concept Event extension — League Event dispatcher wiring",
             "support": {
                 "issues": "https://github.com/php-concept-extensions/extension-event/issues",
-                "source": "https://github.com/php-concept-extensions/extension-event/tree/v1.1.4"
+                "source": "https://github.com/php-concept-extensions/extension-event/tree/v1.1.5"
             },
-            "time": "2026-11-06T10:28:46+00:00"
+            "time": "2026-11-06T10:54:47+00:00"
         },
         {
             "name": "psr/container",
