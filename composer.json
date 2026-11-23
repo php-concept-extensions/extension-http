@@ -11,7 +11,7 @@
     "require": {
         "php": "^8.4",
         "php-concept/core-2": "^1.0",
-        "php-concept/extension-event": "^1.0",
+        "php-concept/extension-event": "^3.0",
         "laminas/laminas-diactoros": "^3.8",
         "league/route": "^6.2",
         "league/container": "^5.1",
