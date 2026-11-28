@@ -8,10 +8,12 @@ use Concept\Extensions\Event\Support\EventDispatcherResolver;
 use Concept\Extensions\Http\Console\Commands\RouteListCommand;
 use Concept\Extensions\Http\Contracts\ResponseFactoryInterface;
 use Concept\Extensions\Http\Contracts\UrlGeneratorInterface;
+use Concept\Extensions\Http\Contracts\UrlHelperInterface;
 use Concept\Extensions\Http\Requests\RequestFormat;
 use Concept\Extensions\Http\Response\ResponseFactory;
 use Concept\Extensions\Http\Routing\RouteDescriptor;
 use Concept\Extensions\Http\Routing\UrlGenerator;
+use Concept\Extensions\Http\Routing\UrlHelper;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use League\Route\Router;
 
@@ -23,6 +25,7 @@ final class HttpServiceProvider extends AbstractServiceProvider
     {
         return in_array($id, [
             UrlGeneratorInterface::class,
+            UrlHelperInterface::class,
             RouteDescriptor::class,
             RequestFormat::class,
             ResponseFactoryInterface::class,
@@ -41,6 +44,13 @@ final class HttpServiceProvider extends AbstractServiceProvider
             $requestContext = $container->get(RequestContextInterface::class);
 
             return new UrlGenerator($router, $requestContext);
+        })->setShared(true);
+
+        $container->add(UrlHelperInterface::class, function() use ($container) {
+            /** @var RequestContextInterface $requestContext */
+            $requestContext = $container->get(RequestContextInterface::class);
+
+            return new UrlHelper($requestContext);
         })->setShared(true);
 
         $container->add(RouteDescriptor::class, function() use ($container) {
